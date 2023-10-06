@@ -32,6 +32,7 @@ class Plot():
         self.save_to     = options['save_to']
         self.def_path    = options['def_path']
         self.transparent = options['transparent']
+        self.plot_title  = options['plot_title']
 
         self.timeout = options['timeout']
         self.t_label = options['t_label']

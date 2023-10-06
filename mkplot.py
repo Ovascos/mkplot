@@ -61,6 +61,7 @@ def parse_options():
                                     'transparent',
                                     'vbs=',
                                     'xkcd',
+                                    'plot-title=',
                                     'xlabel=',
                                     'xlog',
                                     'xmin=',
@@ -161,6 +162,8 @@ def parse_options():
             options['y_min'] = float(arg)
         elif opt == '--ymax':
             options['y_max'] = float(arg)
+        elif opt == '--plot-title':
+            options['plot_title'] = str(arg)
         else:
             assert False, 'Unhandled option: {0} {1}'.format(opt, arg)
 
