@@ -114,7 +114,9 @@ class Cactus(Plot, object):
         # making the legend
         if self.lgd_loc != 'off':
             lgtext = [d[0] for d in data]
-            lg = ax.legend(lines, lgtext, ncol=self.lgd_ncol, loc=self.lgd_loc, fancybox=self.lgd_fancy, shadow=self.lgd_shadow if self.lgd_alpha == 1.0 else False)
+            box = ax.get_position()
+            ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+            lg = ax.legend(lines, lgtext, bbox_to_anchor=(1, 0.5))
             fr = lg.get_frame()
             fr.set_lw(1)
             fr.set_alpha(self.lgd_alpha)
