@@ -41,12 +41,19 @@ class Cactus(Plot, object):
         """
             Does the plotting.
         """
+        # data[i][0] = tool name
+        # Sort by tool name
+        data.sort(key=lambda x: x[0])
 
         # making lines
+        lines_colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#8c564b', '#e377c2']
         coords = []
-        for d in data:
+        for i, d in enumerate(data):
             coords.append(np.arange(1, len(d[1]) + 1))  # xs (separate for each line)
             coords.append(np.array(sorted(d[1])))
+            coords.append(lines_colors[i % len(lines_colors)])
+        if self.plot_title:
+            plt.title(self.plot_title)
         lines = plt.plot(*coords, zorder=3)
 
         # setting line styles
@@ -107,7 +114,9 @@ class Cactus(Plot, object):
         # making the legend
         if self.lgd_loc != 'off':
             lgtext = [d[0] for d in data]
-            lg = ax.legend(lines, lgtext, ncol=self.lgd_ncol, loc=self.lgd_loc, fancybox=self.lgd_fancy, shadow=self.lgd_shadow if self.lgd_alpha == 1.0 else False)
+            box = ax.get_position()
+            ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+            lg = ax.legend(lines, lgtext, bbox_to_anchor=(1, 0.5))
             fr = lg.get_frame()
             fr.set_lw(1)
             fr.set_alpha(self.lgd_alpha)
