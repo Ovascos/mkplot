@@ -82,8 +82,7 @@ class Scatter(Plot, object):
         plt.plot(x, x, color='black', ls=':', lw=1.5, zorder=3)
         plt.plot(x, 0.1 * x, 'g:', lw=1.5, zorder=3)
         plt.plot(x, 10 * x, 'g:', lw=1.5, zorder=3)
-        plt.fill_between(x, 0.1 * x, 10 * x, facecolor='green', alpha=0.15,
-            zorder=3)
+        plt.fill_between(x, 0.1 * x, 10 * x, facecolor='green', alpha=0.15, zorder=3)
 
         plt.xlim([self.x_min, self.x_max])
         plt.ylim([self.y_min, self.y_max])
@@ -134,10 +133,15 @@ class Scatter(Plot, object):
         if not self.no_grid:
             plt.grid(True, color='black', ls=':', lw=1, zorder=1)
 
+        if self.plot_title:
+            plt.title(self.plot_title)
+
         # choosing logarithmic scales
         ax = plt.gca()
-        ax.set_xscale('log')
-        ax.set_yscale('log')
+        if self.x_log:
+            ax.set_xscale('log')
+        if self.y_log:
+            ax.set_yscale('log')
 
         # setting ticks font properties
         # set_*ticklables() seems to be not needed in matplotlib 1.5.0
